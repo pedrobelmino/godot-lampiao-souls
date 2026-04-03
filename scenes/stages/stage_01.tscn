@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b0tadrf587noh" path="res://scripts/stage_01.gd" id="2"]
 [ext_resource type="Script" uid="uid://crooyyk8ssec4" path="res://scripts/goal.gd" id="3"]
 [ext_resource type="Script" uid="uid://bsmnlxbhujkf2" path="res://scripts/kill_zone.gd" id="4"]
-[ext_resource type="PackedScene" uid="uid://police_enemy01" path="res://scenes/police_enemy.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/police_enemy.tscn" id="5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kill"]
 size = Vector2(1965, 120)
@@ -32,7 +32,7 @@ color = Color(0.3263415, 0.30331892, 0.20934555, 1)
 
 [node name="Player" parent="." unique_id=761132829 instance=ExtResource("1")]
 
-[node name="PoliceEnemy" parent="." instance=ExtResource("5")]
+[node name="PoliceEnemy" parent="." unique_id=1666626134 instance=ExtResource("5")]
 position = Vector2(820, -80)
 
 [node name="KillZone" type="Area2D" parent="." unique_id=2068579380]
