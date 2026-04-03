@@ -39,7 +39,7 @@ position = Vector2(1032, -80)
 weapon_mode = 1
 
 [node name="Goal" type="Area2D" parent="." unique_id=2041331640]
-position = Vector2(1384, 224)
+position = Vector2(1480, 224)
 script = ExtResource("3")
 next_scene = "res://scenes/victory.tscn"
 
