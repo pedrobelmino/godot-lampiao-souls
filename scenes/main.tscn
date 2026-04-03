@@ -1,0 +1,150 @@
+[gd_scene load_steps=4 format=3 uid="uid://mainmenu01"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0.08, 0.72, 0.62, 1)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 28.0
+content_margin_top = 14.0
+content_margin_right = 28.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.12, 0.82, 0.72, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 28.0
+content_margin_top = 14.0
+content_margin_right = 28.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+bg_color = Color(0.06, 0.55, 0.5, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 28.0
+content_margin_top = 14.0
+content_margin_right = 28.0
+content_margin_bottom = 14.0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+first_stage = "res://scenes/stages/stage_01.tscn"
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.07, 0.12, 1)
+
+[node name="BackgroundTop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.12, 0.2, 0.65)
+
+[node name="ContentRoot" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterBlock" type="CenterContainer" parent="ContentRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="ContentRoot/CenterBlock"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Logo" type="TextureRect" parent="ContentRoot/CenterBlock/Column"]
+custom_minimum_size = Vector2(420, 88)
+layout_mode = 2
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Tagline" type="Label" parent="ContentRoot/CenterBlock/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.92, 0.88, 1)
+theme_override_font_sizes/font_size = 17
+text = "Loja de aplicativos"
+horizontal_alignment = 1
+
+[node name="Credit" type="Label" parent="ContentRoot/CenterBlock/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.65, 0.68, 1)
+theme_override_font_sizes/font_size = 14
+text = "Pedro Belmino"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="ContentRoot/CenterBlock/Column"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="ContentRoot/CenterBlock/Column"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+theme_override_colors/separator = Color(0.2, 0.55, 0.5, 0.45)
+
+[node name="PlayButton" type="Button" parent="ContentRoot/CenterBlock/Column"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.04, 0.09, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.02, 0.12, 0.12, 1)
+theme_override_colors/font_pressed_color = Color(0.02, 0.08, 0.08, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+text = "Entrar no jogo"
+
+[node name="FooterHint" type="Label" parent="ContentRoot"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.4, 0.48, 0.52, 0.85)
+theme_override_font_sizes/font_size = 12
+text = "Controles: setas ou A/D — Espaço ou seta cima para pular"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[connection signal="pressed" from="ContentRoot/CenterBlock/Column/PlayButton" to="." method="_on_play_pressed"]
