@@ -6,8 +6,8 @@ const GRAVITY := 1050.0
 const SHOOT_COOLDOWN := 0.22
 
 const BULLET_SCENE := preload("res://scenes/bullet.tscn")
+const FIRST_STAGE := "res://scenes/stages/stage_01.tscn"
 
-var _spawn_global: Vector2
 var _anim_t := 0.0
 var _shoot_cd := 0.0
 
@@ -66,10 +66,5 @@ func _fire_bullet() -> void:
 		parent_node.add_child(b)
 
 
-func notify_spawn_from_stage() -> void:
-	_spawn_global = global_position
-
-
 func reset_to_spawn() -> void:
-	velocity = Vector2.ZERO
-	global_position = _spawn_global
+	get_tree().change_scene_to_file(FIRST_STAGE)
