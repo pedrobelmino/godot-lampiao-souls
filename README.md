@@ -2,10 +2,10 @@
 
 Jogo de plataforma 2D ambientado no sertão, com movimento, pulo, arma e fases em estilo *Souls-like* leve (cenários com risco e progressão).
 
-Este repositório chama-se **ideacao**; no Godot o projeto aparece como **Bellapps** (`project.godot`).
+Este repositório chama-se **ideacao**; o nome da aplicação no Godot é **Lampião Souls** (`project.godot`, campo `config/name`).
 
 <p align="center">
-  <img src="assets/ui/bellapps_logo.png" alt="Bellapps — projeto" width="420" />
+  <img src="assets/ui/bellapps_logo.png" alt="Lampião Souls — logo" width="420" />
 </p>
 
 <p align="center">
