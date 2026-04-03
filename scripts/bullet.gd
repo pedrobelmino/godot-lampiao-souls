@@ -14,6 +14,12 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * SPEED
 	move_and_slide()
 	if get_slide_collision_count() > 0:
+		for i in get_slide_collision_count():
+			var collider := get_slide_collision(i).get_collider()
+			if collider is Node and collider.is_in_group(&"enemy"):
+				collider.queue_free()
+				queue_free()
+				return
 		queue_free()
 		return
 	if _traveled >= MAX_TRAVEL:

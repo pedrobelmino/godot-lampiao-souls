@@ -1,24 +1,47 @@
 extends CharacterBody2D
 
+enum WeaponMode { BATON, GUN }
+
 const MOVE_SPEED := 52.0
 const GRAVITY := 1050.0
 const JUMP_VELOCITY := -400.0
 const WALL_PROBE_LEN := 44.0
 const JUMP_COOLDOWN := 0.38
 const BATON_SWING_AMP := 0.42
+const SHOOT_COOLDOWN := 1.15
+const SHOOT_DELAY_START := 0.55
+
+const ENEMY_BULLET_SCENE := preload("res://scenes/enemy_bullet.tscn")
+
+@export var weapon_mode: WeaponMode = WeaponMode.BATON
 
 @onready var _visual: Node2D = $Visual
 @onready var _baton: Node2D = $Visual/Baton
+@onready var _gun: Node2D = $Visual/Gun
+@onready var _muzzle: Marker2D = $Visual/Gun/Muzzle
 @onready var _wall_probe: RayCast2D = $WallProbe
 
 var _anim_t := 0.0
 var _jump_cd := 0.0
+var _shoot_cd := 0.0
 
 
 func _ready() -> void:
+	add_to_group(&"enemy")
 	var hb := get_node_or_null(^"Hurtbox") as Area2D
 	if hb:
 		hb.body_entered.connect(_on_hurtbox_body_entered)
+	if weapon_mode == WeaponMode.GUN:
+		if _baton:
+			_baton.visible = false
+		if _gun:
+			_gun.visible = true
+		_shoot_cd = SHOOT_DELAY_START
+	else:
+		if _baton:
+			_baton.visible = true
+		if _gun:
+			_gun.visible = false
 
 
 func _physics_process(delta: float) -> void:
@@ -47,8 +70,32 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	_anim_t += delta
-	if _baton:
+	if weapon_mode == WeaponMode.BATON and _baton:
 		_baton.rotation = sin(_anim_t * 6.5) * BATON_SWING_AMP
+	elif weapon_mode == WeaponMode.GUN:
+		if _gun:
+			_gun.rotation = sin(_anim_t * 5.0) * 0.08
+		if player and _muzzle:
+			if _shoot_cd > 0.0:
+				_shoot_cd -= delta
+			if _shoot_cd <= 0.0:
+				_shoot_cd = SHOOT_COOLDOWN
+				_fire_at_player(player)
+
+
+func _fire_at_player(player: Node2D) -> void:
+	if not _muzzle:
+		return
+	var to := player.global_position - _muzzle.global_position
+	if to.length_squared() < 4.0:
+		return
+	to = to.normalized()
+	var b: CharacterBody2D = ENEMY_BULLET_SCENE.instantiate()
+	b.direction = to
+	b.global_position = _muzzle.global_position
+	var parent_node := get_parent()
+	if parent_node:
+		parent_node.add_child(b)
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
