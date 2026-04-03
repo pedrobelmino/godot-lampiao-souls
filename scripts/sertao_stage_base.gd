@@ -58,5 +58,3 @@ func _ready() -> void:
 			float(spawn_tile.x) * cell.x + cell.x * 0.5,
 			float(spawn_tile.y) * cell.y
 		)
-		if p.has_method(&"notify_spawn_from_stage"):
-			p.notify_spawn_from_stage()
