@@ -116,6 +116,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _fire_at_player(player: Node2D) -> void:
+	var ga := get_node_or_null("/root/GameAudio")
+	if ga and ga.has_method(&"play_shoot"):
+		ga.play_shoot()
 	if not _muzzle:
 		return
 	var dx := player.global_position.x - _muzzle.global_position.x

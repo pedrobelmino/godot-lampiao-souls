@@ -84,6 +84,9 @@ polygon = PackedVector2Array(2, -5, 8, -5, 8, 5, 2, 5)
 [node name="Muzzle" type="Marker2D" parent="Weapon"]
 position = Vector2(20, 0)
 
+[node name="FootstepSfx" type="AudioStreamPlayer" parent="."]
+bus = &"Master"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14)
 position_smoothing_enabled = true

@@ -58,3 +58,6 @@ func _ready() -> void:
 			float(spawn_tile.x) * cell.x + cell.x * 0.5,
 			float(spawn_tile.y) * cell.y
 		)
+	var ga := get_node_or_null("/root/GameAudio")
+	if ga and ga.has_method(&"start_music"):
+		ga.start_music()

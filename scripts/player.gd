@@ -22,18 +22,26 @@ const CROUCH_WEAPON_POS := Vector2(0, -10)
 
 const BULLET_SCENE := preload("res://scenes/bullet.tscn")
 const FIRST_STAGE := "res://scenes/stages/stage_01.tscn"
+const FOOTSTEP_PATH := "res://assets/audio/footstep.wav"
+const FOOTSTEP_INTERVAL := 0.34
 
 var _anim_t := 0.0
 var _shoot_cd := 0.0
+var _footstep_cd := 0.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var _cangaceiro: Node2D = $CangaceiroOutfit
 @onready var weapon: Node2D = $Weapon
 @onready var muzzle: Marker2D = $Weapon/Muzzle
 @onready var _body_shape: CollisionShape2D = $CollisionShape2D
+@onready var _footstep_sfx: AudioStreamPlayer = $FootstepSfx
 
 func _ready() -> void:
 	add_to_group(&"player")
+	var fs := load(FOOTSTEP_PATH) as AudioStreamWAV
+	if fs and _footstep_sfx:
+		_footstep_sfx.stream = fs
+		_footstep_sfx.volume_db = -22.0
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	var path := ProjectSettings.globalize_path("res://assets/characters/lampiao_maria_sheet.png")
 	var img := Image.load_from_file(path)
@@ -62,14 +70,22 @@ func _physics_process(delta: float) -> void:
 	_apply_crouch(crouch_visual)
 
 	_anim_t += delta
+	var walk_thresh := MOVE_THRESHOLD * 0.48 if crouch_visual else MOVE_THRESHOLD
+	var walking := absf(velocity.x) > walk_thresh and is_on_floor()
 	if sprite.texture:
-		var walk_thresh := MOVE_THRESHOLD * 0.48 if crouch_visual else MOVE_THRESHOLD
 		sprite.flip_h = velocity.x < -MOVE_THRESHOLD
-		var walking := absf(velocity.x) > walk_thresh and is_on_floor()
 		if walking:
 			sprite.frame = 2 + (int(_anim_t * 7.0) % 2)
 		else:
 			sprite.frame = 0
+
+	if walking:
+		_footstep_cd -= delta
+		if _footstep_cd <= 0.0 and _footstep_sfx and _footstep_sfx.stream:
+			_footstep_cd = FOOTSTEP_INTERVAL
+			_footstep_sfx.play()
+	else:
+		_footstep_cd = 0.0
 
 	var facing_left := sprite.flip_h
 	weapon.scale.x = -1.0 if facing_left else 1.0
@@ -84,6 +100,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _fire_bullet() -> void:
+	var ga := get_node_or_null("/root/GameAudio")
+	if ga and ga.has_method(&"play_shoot"):
+		ga.play_shoot()
 	var facing := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
 	var b: CharacterBody2D = BULLET_SCENE.instantiate()
 	b.direction = facing
