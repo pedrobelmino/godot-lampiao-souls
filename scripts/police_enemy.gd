@@ -27,6 +27,7 @@ var _shoot_cd := 0.0
 
 
 func _ready() -> void:
+	velocity = Vector2.ZERO
 	add_to_group(&"enemy")
 	var hb := get_node_or_null(^"Hurtbox") as Area2D
 	if hb:
@@ -75,7 +76,7 @@ func _physics_process(delta: float) -> void:
 	elif weapon_mode == WeaponMode.GUN:
 		if _gun:
 			_gun.rotation = sin(_anim_t * 5.0) * 0.08
-		if player and _muzzle:
+		if player and _muzzle and is_on_floor():
 			if _shoot_cd > 0.0:
 				_shoot_cd -= delta
 			if _shoot_cd <= 0.0:
@@ -86,12 +87,12 @@ func _physics_process(delta: float) -> void:
 func _fire_at_player(player: Node2D) -> void:
 	if not _muzzle:
 		return
-	var to := player.global_position - _muzzle.global_position
-	if to.length_squared() < 4.0:
+	var dx := player.global_position.x - _muzzle.global_position.x
+	if absf(dx) < 2.0:
 		return
-	to = to.normalized()
+	var aim := Vector2(signf(dx), 0.0)
 	var b: CharacterBody2D = ENEMY_BULLET_SCENE.instantiate()
-	b.direction = to
+	b.direction = aim
 	b.global_position = _muzzle.global_position
 	var parent_node := get_parent()
 	if parent_node:

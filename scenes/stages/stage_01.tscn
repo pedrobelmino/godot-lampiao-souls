@@ -33,7 +33,7 @@ color = Color(0.3263415, 0.30331892, 0.20934555, 1)
 [node name="Player" parent="." unique_id=761132829 instance=ExtResource("1")]
 
 [node name="PoliceEnemy" parent="." instance=ExtResource("5")]
-position = Vector2(820, 240)
+position = Vector2(820, -80)
 
 [node name="KillZone" type="Area2D" parent="." unique_id=2068579380]
 position = Vector2(480, 620)
