@@ -12,11 +12,13 @@ var _anim_t := 0.0
 var _shoot_cd := 0.0
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var _cangaceiro: Node2D = $CangaceiroOutfit
 @onready var weapon: Node2D = $Weapon
 @onready var muzzle: Marker2D = $Weapon/Muzzle
 
 func _ready() -> void:
 	add_to_group(&"player")
+	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	var path := ProjectSettings.globalize_path("res://assets/characters/lampiao_maria_sheet.png")
 	var img := Image.load_from_file(path)
 	if img != null:
@@ -46,7 +48,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			sprite.frame = 0 + (int(_anim_t * 3.5) % 2)
 
-	weapon.scale.x = -1.0 if sprite.flip_h else 1.0
+	var facing_left := sprite.flip_h
+	weapon.scale.x = -1.0 if facing_left else 1.0
+	if _cangaceiro:
+		_cangaceiro.scale.x = -1.0 if facing_left else 1.0
 
 	if _shoot_cd > 0.0:
 		_shoot_cd -= delta
