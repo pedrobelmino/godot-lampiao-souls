@@ -4,6 +4,7 @@ const SPEED := 240.0
 const JUMP_VELOCITY := -450.0
 const GRAVITY := 1050.0
 const SHOOT_COOLDOWN := 0.22
+const MOVE_THRESHOLD := 12.0
 
 const BULLET_SCENE := preload("res://scenes/bullet.tscn")
 const FIRST_STAGE := "res://scenes/stages/stage_01.tscn"
@@ -42,11 +43,12 @@ func _physics_process(delta: float) -> void:
 
 	_anim_t += delta
 	if sprite.texture:
-		sprite.flip_h = velocity.x < -12.0
-		if absf(velocity.x) > 12.0:
+		sprite.flip_h = velocity.x < -MOVE_THRESHOLD
+		var walking := absf(velocity.x) > MOVE_THRESHOLD and is_on_floor()
+		if walking:
 			sprite.frame = 2 + (int(_anim_t * 7.0) % 2)
 		else:
-			sprite.frame = 0 + (int(_anim_t * 3.5) % 2)
+			sprite.frame = 0
 
 	var facing_left := sprite.flip_h
 	weapon.scale.x = -1.0 if facing_left else 1.0
