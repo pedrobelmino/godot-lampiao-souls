@@ -1,3 +1,6 @@
 .godot/
 *.import
-.cursor/
+# Config local do Cursor; skills do projeto ficam versionadas
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**/*
