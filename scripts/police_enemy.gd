@@ -4,9 +4,11 @@ enum WeaponMode { BATON, GUN }
 
 const MOVE_SPEED := 52.0
 const GRAVITY := 1050.0
-const JUMP_VELOCITY := -400.0
+## Mais alto que antes (~-400) para atravessar buracos típicos de 1–2 tiles sem cair.
+const JUMP_VELOCITY := -535.0
 const WALL_PROBE_LEN := 44.0
-const JUMP_COOLDOWN := 0.38
+const FLOOR_PROBE_LEN := 48.0
+const JUMP_COOLDOWN := 0.32
 const BATON_SWING_AMP := 0.42
 const SHOOT_COOLDOWN := 1.15
 const SHOOT_DELAY_START := 0.55
@@ -20,6 +22,13 @@ const ENEMY_BULLET_SCENE := preload("res://scenes/enemy_bullet.tscn")
 @onready var _gun: Node2D = $Visual/Gun
 @onready var _muzzle: Marker2D = $Visual/Gun/Muzzle
 @onready var _wall_probe: RayCast2D = $WallProbe
+@onready var _floor_probe: RayCast2D = $FloorProbe
+@onready var _body_collision: CollisionShape2D = $CollisionShape2D
+
+## Retângulo de colisão do corpo (não usa Visual / arma).
+var _body_half_width: float = 9.0
+var _body_floor_y: float = 0.0
+var _body_mid_y: float = -14.0
 
 var _anim_t := 0.0
 var _jump_cd := 0.0
@@ -44,6 +53,16 @@ func _ready() -> void:
 		if _gun:
 			_gun.visible = false
 
+	_init_body_probe_offsets()
+
+
+func _init_body_probe_offsets() -> void:
+	if _body_collision and _body_collision.shape is RectangleShape2D:
+		var rect := _body_collision.shape as RectangleShape2D
+		_body_half_width = rect.size.x * 0.5
+		_body_floor_y = _body_collision.position.y + rect.size.y * 0.5
+		_body_mid_y = _body_collision.position.y
+
 
 func _physics_process(delta: float) -> void:
 	if _jump_cd > 0.0:
@@ -60,10 +79,22 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = 0.0
 
-	if is_on_floor() and dir != 0.0 and _jump_cd <= 0.0 and _wall_probe:
-		_wall_probe.target_position = Vector2(dir * WALL_PROBE_LEN, 0.0)
-		_wall_probe.force_raycast_update()
-		if _wall_probe.is_colliding():
+	if is_on_floor() and dir != 0.0 and _jump_cd <= 0.0:
+		var should_jump := false
+		var front_x := dir * _body_half_width
+		if _wall_probe:
+			_wall_probe.position = Vector2(front_x, _body_mid_y)
+			_wall_probe.target_position = Vector2(dir * WALL_PROBE_LEN, 0.0)
+			_wall_probe.force_raycast_update()
+			if _wall_probe.is_colliding():
+				should_jump = true
+		if _floor_probe:
+			_floor_probe.position = Vector2(front_x, _body_floor_y)
+			_floor_probe.target_position = Vector2(0.0, FLOOR_PROBE_LEN)
+			_floor_probe.force_raycast_update()
+			if not _floor_probe.is_colliding():
+				should_jump = true
+		if should_jump:
 			velocity.y = JUMP_VELOCITY
 			_jump_cd = JUMP_COOLDOWN
 
@@ -85,6 +116,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _fire_at_player(player: Node2D) -> void:
+	var ga := get_node_or_null("/root/GameAudio")
+	if ga and ga.has_method(&"play_shoot"):
+		ga.play_shoot()
 	if not _muzzle:
 		return
 	var dx := player.global_position.x - _muzzle.global_position.x

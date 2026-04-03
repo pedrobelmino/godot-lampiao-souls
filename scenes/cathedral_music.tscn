@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cathedral_music_scene"]
+
+[ext_resource type="Script" path="res://scripts/cathedral_music.gd" id="1"]
+[ext_resource type="AudioStream" path="res://assets/audio/cathedral_amb.ogg" id="2"]
+
+[node name="CathedralMusic" type="Node"]
+script = ExtResource("1")
+
+[node name="StreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2")
+autoplay = false
+bus = &"Master"

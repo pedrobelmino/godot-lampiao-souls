@@ -1,10 +1,11 @@
-[gd_scene format=3 uid="uid://stg01"]
+[gd_scene load_steps=6 format=3 uid="uid://stg01"]
 
 [ext_resource type="PackedScene" uid="uid://bqxplayer01" path="res://scenes/player.tscn" id="1"]
 [ext_resource type="Script" uid="uid://b0tadrf587noh" path="res://scripts/stage_01.gd" id="2"]
 [ext_resource type="Script" uid="uid://crooyyk8ssec4" path="res://scripts/goal.gd" id="3"]
 [ext_resource type="Script" uid="uid://bsmnlxbhujkf2" path="res://scripts/kill_zone.gd" id="4"]
-[ext_resource type="PackedScene" uid="uid://police_enemy01" path="res://scenes/police_enemy.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/police_enemy.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://goal_door_visual" path="res://scenes/goal_door_visual.tscn" id="6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kill"]
 size = Vector2(1965, 120)
@@ -26,13 +27,13 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3263415, 0.30331892, 0.20934555, 1)
+color = Color(0.52, 0.62, 0.74, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=164668968]
 
 [node name="Player" parent="." unique_id=761132829 instance=ExtResource("1")]
 
-[node name="PoliceEnemy" parent="." instance=ExtResource("5")]
+[node name="PoliceEnemy" parent="." unique_id=1666626134 instance=ExtResource("5")]
 position = Vector2(820, -80)
 
 [node name="KillZone" type="Area2D" parent="." unique_id=2068579380]
@@ -43,13 +44,11 @@ script = ExtResource("4")
 shape = SubResource("RectangleShape2D_kill")
 
 [node name="Goal" type="Area2D" parent="." unique_id=1153372488]
-position = Vector2(900, 212)
+position = Vector2(968, 212)
 script = ExtResource("3")
 next_scene = "res://scenes/stages/stage_02.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1993944918]
 shape = SubResource("RectangleShape2D_goal")
 
-[node name="Polygon2D" type="Polygon2D" parent="Goal" unique_id=549926661]
-color = Color(0.55, 0.85, 0.35, 1)
-polygon = PackedVector2Array(-20, -40, 20, -40, 20, 16, -20, 16)
+[node name="DoorVisual" parent="Goal" instance=ExtResource("6")]
