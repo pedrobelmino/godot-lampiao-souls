@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxplayer01"]
+[gd_scene load_steps=3 format=3 uid="uid://bqxplayer01"]
 
 [ext_resource type="Script" uid="uid://dtbmllmq1hvrc" path="res://scripts/player.gd" id="1"]
-[ext_resource type="Shader" path="res://assets/shaders/player_dead_cells_style.gdshader" id="2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(16, 28)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_player"]
-shader = ExtResource("2")
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -17,54 +13,47 @@ script = ExtResource("1")
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_body")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 0
-material = SubResource("ShaderMaterial_player")
-position = Vector2(0, -18)
-hframes = 8
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2(0, -14)
 
-[node name="CangaceiroOutfit" type="Node2D" parent="."]
-position = Vector2(0, -18)
+[node name="HairMain" type="Polygon2D" parent="Visual"]
+color = Color(0.12, 0.06, 0.1, 1)
+polygon = PackedVector2Array(-9, -26, 9, -26, 12, -8, 10, 10, 4, 16, -4, 16, -10, 10, -12, -8)
 
-[node name="Bandolier" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.12, 0.08, 0.06, 1)
-polygon = PackedVector2Array(-4, -2, 10, -10, 12, -6, -2, 2)
+[node name="HairStrandL" type="Node2D" parent="Visual"]
+position = Vector2(-11, -4)
 
-[node name="BandolierBack" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.08, 0.05, 0.04, 1)
-polygon = PackedVector2Array(4, -2, -10, -10, -12, -6, 2, 2)
+[node name="Strand" type="Polygon2D" parent="Visual/HairStrandL"]
+color = Color(0.1, 0.05, 0.08, 1)
+polygon = PackedVector2Array(0, 0, -5, 14, -2, 16, 4, 2)
 
-[node name="CartuchoA" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.92, 0.82, 0.52, 1)
-polygon = PackedVector2Array(0, -8, 3, -8, 3, -5, 0, -5)
+[node name="HairStrandR" type="Node2D" parent="Visual"]
+position = Vector2(11, -4)
 
-[node name="CartuchoB" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.92, 0.82, 0.52, 1)
-polygon = PackedVector2Array(3, -5, 6, -5, 6, -2, 3, -2)
+[node name="Strand" type="Polygon2D" parent="Visual/HairStrandR"]
+color = Color(0.14, 0.07, 0.11, 1)
+polygon = PackedVector2Array(0, 0, 5, 14, 2, 16, -4, 2)
 
-[node name="CartuchoC" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.92, 0.82, 0.52, 1)
-polygon = PackedVector2Array(6, -2, 9, -2, 9, 1, 6, 1)
+[node name="HairTip" type="Node2D" parent="Visual"]
+position = Vector2(0, 12)
 
-[node name="Bandanna" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.72, 0.16, 0.22, 1)
-polygon = PackedVector2Array(-11, -6, 11, -6, 11, -12, -11, -12)
+[node name="Tip" type="Polygon2D" parent="Visual/HairTip"]
+color = Color(0.09, 0.04, 0.07, 1)
+polygon = PackedVector2Array(-6, 0, 6, 0, 4, 8, -4, 8)
 
-[node name="BandannaFold" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.45, 0.1, 0.14, 1)
-polygon = PackedVector2Array(-11, -12, 11, -12, 11, -14, -11, -14)
+[node name="LegL" type="Node2D" parent="Visual"]
+position = Vector2(-5, 13)
 
-[node name="HatCrown" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.14, 0.12, 0.16, 1)
-polygon = PackedVector2Array(-11, -22, 11, -22, 9, -30, -9, -30)
+[node name="Shape" type="Polygon2D" parent="Visual/LegL"]
+color = Color(0.08, 0.04, 0.07, 1)
+polygon = PackedVector2Array(-2, 0, 2, 0, 2, 10, -2, 10)
 
-[node name="HatHighlight" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.42, 0.4, 0.48, 1)
-polygon = PackedVector2Array(-7, -28, 7, -28, 6, -30, -6, -30)
+[node name="LegR" type="Node2D" parent="Visual"]
+position = Vector2(5, 13)
 
-[node name="HatBrim" type="Polygon2D" parent="CangaceiroOutfit"]
-color = Color(0.1, 0.08, 0.1, 1)
-polygon = PackedVector2Array(-17, -20, 17, -20, 19, -16, -19, -16)
+[node name="Shape" type="Polygon2D" parent="Visual/LegR"]
+color = Color(0.08, 0.04, 0.07, 1)
+polygon = PackedVector2Array(-2, 0, 2, 0, 2, 10, -2, 10)
 
 [node name="Weapon" type="Node2D" parent="."]
 position = Vector2(0, -16)
