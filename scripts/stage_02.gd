@@ -4,6 +4,13 @@ func _ready() -> void:
 	# Catedral: paredes laterais (t, colisão); pilares centrais (m, só visual).
 	spawn_tile = Vector2i(3, 15)
 	super._ready()
+	call_deferred(&"_play_cathedral_music")
+
+
+func _play_cathedral_music() -> void:
+	var ga := get_node_or_null("/root/GameAudio")
+	if ga and ga.has_method(&"start_music"):
+		ga.start_music()
 
 func _get_map() -> String:
 	return """

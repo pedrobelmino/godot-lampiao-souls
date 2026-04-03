@@ -5,6 +5,9 @@ func _ready() -> void:
 	# 16 linhas; chão na linha 15.
 	spawn_tile = Vector2i(3, 15)
 	super._ready()
+	var ga := get_node_or_null("/root/GameAudio")
+	if ga and ga.has_method(&"stop_music"):
+		ga.stop_music()
 
 func _get_map() -> String:
 	return """

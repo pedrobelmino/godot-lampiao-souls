@@ -8,21 +8,25 @@ var _shoot: AudioStreamPlayer
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_music = AudioStreamPlayer.new()
 	_music.name = &"Music"
+	_music.bus = &"Master"
 	add_child(_music)
-	var ms := load(MUSIC_PATH) as AudioStreamWAV
-	if ms:
-		ms.loop_mode = AudioStreamWAV.LOOP_FORWARD
-		_music.stream = ms
-		_music.volume_db = -20.0
+	var ms = load(MUSIC_PATH)
+	if ms is AudioStreamWAV:
+		var wav := (ms as AudioStreamWAV).duplicate() as AudioStreamWAV
+		wav.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		_music.stream = wav
+		_music.volume_db = -14.0
 
 	_shoot = AudioStreamPlayer.new()
 	_shoot.name = &"Shoot"
+	_shoot.bus = &"Master"
 	add_child(_shoot)
-	var ss := load(SHOOT_PATH) as AudioStreamWAV
-	if ss:
-		_shoot.stream = ss
+	var ss = load(SHOOT_PATH)
+	if ss is AudioStreamWAV:
+		_shoot.stream = ss as AudioStreamWAV
 		_shoot.volume_db = -16.0
 
 
@@ -32,6 +36,13 @@ func start_music() -> void:
 	if _music.playing:
 		return
 	_music.play()
+
+
+func stop_music() -> void:
+	if _music == null:
+		return
+	if _music.playing:
+		_music.stop()
 
 
 func play_shoot() -> void:
