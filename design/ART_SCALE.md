@@ -1,4 +1,4 @@
-# Escala travada — pixel cru (sertão ritual)
+a # Escala travada — pixel cru (sertão ritual)
 
 Todos os novos assets devem obedecer estes números.
 

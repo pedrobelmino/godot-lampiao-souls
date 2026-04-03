@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://stg02"]
+[gd_scene load_steps=9 format=3 uid="uid://stg02"]
 
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/stage_02.gd" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/kill_zone.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://police_enemy01" path="res://scenes/police_enemy.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://goal_door_visual" path="res://scenes/goal_door_visual.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://cathedral_music_scene" path="res://scenes/cathedral_music.tscn" id="7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_goal"]
 size = Vector2(40, 56)
@@ -15,6 +16,8 @@ size = Vector2(3600, 160)
 
 [node name="Stage02" type="Node2D"]
 script = ExtResource("2")
+
+[node name="CathedralMusic" parent="." instance=ExtResource("7")]
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -10

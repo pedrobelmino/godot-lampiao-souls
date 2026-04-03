@@ -28,6 +28,7 @@ const FOOTSTEP_INTERVAL := 0.34
 var _anim_t := 0.0
 var _shoot_cd := 0.0
 var _footstep_cd := 0.0
+var _is_dead := false
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var _cangaceiro: Node2D = $CangaceiroOutfit
@@ -54,6 +55,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if _is_dead:
+		return
+
 	velocity.y += GRAVITY * delta
 
 	if Input.is_action_just_pressed(&"jump") and is_on_floor():
@@ -133,4 +137,51 @@ func _apply_crouch(crouching: bool) -> void:
 
 
 func reset_to_spawn() -> void:
+	begin_death_sequence()
+
+
+func begin_death_sequence() -> void:
+	if _is_dead:
+		return
+	_is_dead = true
+	set_physics_process(false)
+	collision_layer = 0
+	collision_mask = 0
+	_add_death_overlay()
+	var tw := create_tween()
+	tw.set_parallel(true)
+	tw.set_trans(Tween.TRANS_QUAD)
+	tw.set_ease(Tween.EASE_IN)
+	tw.tween_property(sprite, "rotation", PI * 0.5, 0.55)
+	if _cangaceiro:
+		tw.tween_property(_cangaceiro, "rotation", PI * 0.5, 0.55)
+	if weapon:
+		tw.tween_property(weapon, "rotation", PI * 0.5, 0.55)
+	tw.tween_property(self, "global_position:y", global_position.y + 88.0, 0.62)
+	await get_tree().create_timer(6.0).timeout
 	get_tree().change_scene_to_file(FIRST_STAGE)
+
+
+func _add_death_overlay() -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 120
+	layer.name = &"DeathOverlay"
+	var holder := get_parent()
+	if holder:
+		holder.add_child(layer)
+	else:
+		get_tree().root.add_child(layer)
+	var ctrl := Control.new()
+	ctrl.set_anchors_preset(Control.PRESET_FULL_RECT)
+	ctrl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(ctrl)
+	var lbl := Label.new()
+	lbl.text = "You died"
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.set_anchors_preset(Control.PRESET_FULL_RECT)
+	lbl.add_theme_font_size_override(&"font_size", 42)
+	lbl.add_theme_color_override(&"font_color", Color(0.92, 0.18, 0.14, 0.96))
+	lbl.add_theme_color_override(&"font_outline_color", Color(0.05, 0.02, 0.02, 1.0))
+	lbl.add_theme_constant_override(&"outline_size", 4)
+	ctrl.add_child(lbl)
