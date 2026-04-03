@@ -1,13 +1,13 @@
 ---
-name: ideacao-stages-and-maps
+name: godot-lampiao-souls-stages-and-maps
 description: >-
-  Explains how stages are built in ideacao: sertao_stage_base.gd, ASCII map
+  Explains how stages are built in godot-lampiao-souls: sertao_stage_base.gd, ASCII map
   format, tile character codes, spawn_tile, and per-stage scripts. Use when
   editing TileMaps, adding stages, level design, or when the user mentions
   mapa ASCII, fases, stage_0, or sertao.
 ---
 
-# Fases e mapas (ideacao)
+# Fases e mapas (godot-lampiao-souls)
 
 ## Base comum
 

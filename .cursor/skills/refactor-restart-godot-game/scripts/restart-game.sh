@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Project root: ideacao/ (four levels up from this script)
+# Project root: repo clone folder (four levels up from this script)
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 if [[ ! -f "$ROOT/project.godot" ]]; then
   echo "error: project.godot not found at $ROOT" >&2

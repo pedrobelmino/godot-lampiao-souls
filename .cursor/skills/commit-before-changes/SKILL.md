@@ -3,7 +3,7 @@ name: commit-before-changes
 description: >-
   Requires a git checkpoint commit before starting file edits; and after every
   10 commits ahead of main, open a pull request and merge into main. Use in
-  ideacao or when the user asks commit antes de modificar, checkpoint, PR a cada
+  godot-lampiao-souls or when the user asks commit antes de modificar, checkpoint, PR a cada
   10 commits, or merge na main.
 ---
 

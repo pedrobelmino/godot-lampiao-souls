@@ -1,13 +1,13 @@
 ---
-name: ideacao-project-overview
+name: godot-lampiao-souls-project-overview
 description: >-
-  Maps the ideacao repository (Godot 4 platformer "Lampião Souls"): entry scene,
+  Maps the godot-lampiao-souls repository (Godot 4 platformer "Lampião Souls"): entry scene,
   folders, main gameplay scripts, input, physics layers, and scene flow. Use
   when onboarding, locating files, understanding project layout, or when the
   user asks onde fica, estrutura, overview, or how the game starts.
 ---
 
-# ideacao — visão geral do projeto
+# godot-lampiao-souls — visão geral do projeto
 
 ## O que é
 
@@ -55,4 +55,4 @@ description: >-
 ## Outras skills deste repo
 
 - Refatoração + reinício do Godot: `.cursor/skills/refactor-restart-godot-game/`
-- Mapas ASCII e tiles: `.cursor/skills/ideacao-stages-and-maps/`
+- Mapas ASCII e tiles: `.cursor/skills/godot-lampiao-souls-stages-and-maps/`

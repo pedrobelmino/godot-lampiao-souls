@@ -18,7 +18,7 @@ Não espere o usuário pedir “reinicie o jogo” se ele já pediu refatoraçã
 
 ## Passos obrigatórios (fim do turno de refatoração)
 
-1. **Encerrar** processos do Godot que estejam rodando este projeto (caminho com `ideacao` e `godot` na linha de comando).
+1. **Encerrar** processos do Godot que estejam rodando este projeto (caminho do projeto e `godot` na linha de comando).
 2. **Subir** uma nova instância do jogo com `--path` apontando para a raiz do projeto (onde está `project.godot`).
 3. Se o ambiente não tiver display (CI/headless), ainda assim execute o `pkill` e informe que o reinício gráfico precisa ser feito localmente; tente `godot --path ... --headless --quit-after 1` só como checagem de carga de projeto, não como substituto do jogo visível.
 
@@ -30,14 +30,14 @@ Execute o script desta skill (raiz do projeto = pasta que contém `project.godot
 bash .cursor/skills/refactor-restart-godot-game/scripts/restart-game.sh
 ```
 
-(A partir do diretório `ideacao/`.)
+(A partir da raiz do clone, por exemplo `godot-lampiao-souls/`.)
 
 Ou equivalente: `pkill` por padrão seguro + `GODOT` + `--path` até a raiz do workspace que contém `project.godot`.
 
 ## Detecção de processo (Linux)
 
 - Padrão típico da linha de comando: `godot` (ou `Godot_*`) com `--path` contendo o diretório do projeto.
-- Use `pkill -f 'godot.*ideacao'` **ou** o script, que centraliza isso.
+- Use `pkill -f` com um trecho do caminho do projeto (ex.: `godot.*godot-lampiao-souls`) **ou** o script, que usa o caminho absoluto em `${ROOT}`.
 - Não use `killall godot` sem critério: pode fechar outros projetos Godot abertos.
 
 ## Variáveis

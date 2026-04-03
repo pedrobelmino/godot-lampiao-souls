@@ -2,7 +2,7 @@
 
 Jogo de plataforma 2D ambientado no sertão, com movimento, pulo, arma e fases em estilo *Souls-like* leve (cenários com risco e progressão).
 
-Este repositório chama-se **ideacao**; o nome da aplicação no Godot é **Lampião Souls** (`project.godot`, campo `config/name`).
+Repositório no GitHub: **[pedrobelmino/godot-lampiao-souls](https://github.com/pedrobelmino/godot-lampiao-souls)**. O nome da aplicação no Godot é **Lampião Souls** (`project.godot`, campo `config/name`).
 
 <p align="center">
   <img src="assets/ui/bellapps_logo.png" alt="Lampião Souls — logo" width="420" />
@@ -11,6 +11,10 @@ Este repositório chama-se **ideacao**; o nome da aplicação no Godot é **Lamp
 <p align="center">
   <img src="assets/characters/lampiao_maria_sheet.png" alt="Sprites do personagem" width="480" />
 </p>
+
+## Demo
+
+Vídeo de demonstração no YouTube: [Lampião Souls — gameplay](https://www.youtube.com/watch?v=Jvm_43CLaSE).
 
 ## Tecnologias
 
@@ -48,8 +52,8 @@ Este projeto inclui **Agent Skills** em [`.cursor/skills/`](.cursor/skills/) par
 
 | Skill | Função |
 |-------|--------|
-| `ideacao-project-overview` | Mapa do repositório: pastas, scripts principais, input e fluxo de cenas. |
-| `ideacao-stages-and-maps` | Mapas ASCII, `sertao_stage_base.gd`, códigos de *tiles* e criação de fases. |
+| `godot-lampiao-souls-project-overview` | Mapa do repositório: pastas, scripts principais, input e fluxo de cenas. |
+| `godot-lampiao-souls-stages-and-maps` | Mapas ASCII, `sertao_stage_base.gd`, códigos de *tiles* e criação de fases. |
 | `commit-before-changes` | Convenção de *checkpoint* em git antes de alterações maiores e integração periódica. |
 | `refactor-restart-godot-game` | Após refatorações, reiniciar o Godot para validar o jogo. |
 
@@ -61,7 +65,7 @@ Se estiveres a usar **Cursor** (ou outro fluxo com agentes) no âmbito de um **c
 
 ## Como executar
 
-1. Clone este repositório.
+1. Clone este repositório (`git clone https://github.com/pedrobelmino/godot-lampiao-souls.git`).
 2. Abra o Godot e use **Importar** apontando para a pasta do projeto (onde está `project.godot`).
 3. Execute a cena principal (**F5** ou botão Play).
 
