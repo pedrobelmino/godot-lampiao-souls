@@ -1,32 +1,89 @@
-[gd_scene format=3 uid="uid://bqxplayer01"]
+[gd_scene load_steps=4 format=3 uid="uid://bqxplayer01"]
 
 [ext_resource type="Script" uid="uid://dtbmllmq1hvrc" path="res://scripts/player.gd" id="1"]
+[ext_resource type="Shader" path="res://assets/shaders/player_dead_cells_style.gdshader" id="2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(16, 28)
 
-[node name="Player" type="CharacterBody2D" unique_id=1633900194]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_player"]
+shader = ExtResource("2")
+
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=216253480]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_body")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=11559088]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 0
+material = SubResource("ShaderMaterial_player")
 position = Vector2(0, -18)
 hframes = 8
+
+[node name="CangaceiroOutfit" type="Node2D" parent="."]
+position = Vector2(0, -18)
+
+[node name="Bandolier" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.12, 0.08, 0.06, 1)
+polygon = PackedVector2Array(-4, -2, 10, -10, 12, -6, -2, 2)
+
+[node name="BandolierBack" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.08, 0.05, 0.04, 1)
+polygon = PackedVector2Array(4, -2, -10, -10, -12, -6, 2, 2)
+
+[node name="CartuchoA" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.92, 0.82, 0.52, 1)
+polygon = PackedVector2Array(0, -8, 3, -8, 3, -5, 0, -5)
+
+[node name="CartuchoB" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.92, 0.82, 0.52, 1)
+polygon = PackedVector2Array(3, -5, 6, -5, 6, -2, 3, -2)
+
+[node name="CartuchoC" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.92, 0.82, 0.52, 1)
+polygon = PackedVector2Array(6, -2, 9, -2, 9, 1, 6, 1)
+
+[node name="Bandanna" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.72, 0.16, 0.22, 1)
+polygon = PackedVector2Array(-11, -6, 11, -6, 11, -12, -11, -12)
+
+[node name="BandannaFold" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.45, 0.1, 0.14, 1)
+polygon = PackedVector2Array(-11, -12, 11, -12, 11, -14, -11, -14)
+
+[node name="HatCrown" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.14, 0.12, 0.16, 1)
+polygon = PackedVector2Array(-11, -22, 11, -22, 9, -30, -9, -30)
+
+[node name="HatHighlight" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.42, 0.4, 0.48, 1)
+polygon = PackedVector2Array(-7, -28, 7, -28, 6, -30, -6, -30)
+
+[node name="HatBrim" type="Polygon2D" parent="CangaceiroOutfit"]
+color = Color(0.1, 0.08, 0.1, 1)
+polygon = PackedVector2Array(-17, -20, 17, -20, 19, -16, -19, -16)
 
 [node name="Weapon" type="Node2D" parent="."]
 position = Vector2(0, -16)
 
+[node name="GunGrip" type="Polygon2D" parent="Weapon"]
+color = Color(0.28, 0.18, 0.12, 1)
+polygon = PackedVector2Array(-3, -2, -1, -2, -1, 6, -3, 6)
+
 [node name="GunBody" type="Polygon2D" parent="Weapon"]
-color = Color(0.22, 0.18, 0.14, 1)
-polygon = PackedVector2Array(-2, -4, 0, -4, 12, -3, 14, -2, 14, 2, 12, 3, 0, 4, -2, 4)
+color = Color(0.16, 0.18, 0.22, 1)
+polygon = PackedVector2Array(-2, -4, 2, -4, 18, -3, 20, -2, 20, 2, 18, 3, 2, 4, -2, 4)
+
+[node name="GunCylinder" type="Polygon2D" parent="Weapon"]
+color = Color(0.22, 0.24, 0.28, 1)
+polygon = PackedVector2Array(2, -5, 8, -5, 8, 5, 2, 5)
 
 [node name="Muzzle" type="Marker2D" parent="Weapon"]
-position = Vector2(16, 0)
+position = Vector2(20, 0)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=758426]
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14)
 position_smoothing_enabled = true
