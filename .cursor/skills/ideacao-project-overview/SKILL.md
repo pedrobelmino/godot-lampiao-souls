@@ -11,9 +11,8 @@ description: >-
 
 ## O que é
 
-- **Nome no README**: Lampião Souls — plataforma 2D no sertão (movimento, pulo, tiro, fases estilo *Souls-like* leve).
-- **Nome no Godot** (`project.godot`): `Bellapps`.
-- **Motor**: Godot **4.x** (projeto referencia features `4.6`; README sugere 4.4+).
+- **Nome no README e no Godot** (`project.godot`, `config/name`): **Lampião Souls** — plataforma 2D no sertão (movimento, pulo, tiro, fases estilo *Souls-like* leve).
+- **Motor**: Godot **4.x** (projeto referencia features `4.4`; README sugere 4.4+).
 - **Cena principal**: `res://scenes/main.tscn` (`run/main_scene` em `project.godot`).
 
 ## Fluxo de cenas (alto nível)
