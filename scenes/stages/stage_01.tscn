@@ -26,7 +26,7 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3263415, 0.30331892, 0.20934555, 1)
+color = Color(0.52, 0.62, 0.74, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=164668968]
 
