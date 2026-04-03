@@ -1,7 +1,7 @@
 extends "res://scripts/sertao_stage_base.gd"
 
 func _ready() -> void:
-	# Campo aberto; à direita portal (taipa + capela) que antecipa a catedral.
+	# Campo aberto; à direita portal: batentes t, transom c, folhas duplas m + vão central.
 	# 16 linhas; chão na linha 15.
 	spawn_tile = Vector2i(3, 15)
 	super._ready()
@@ -20,8 +20,8 @@ func _get_map() -> String:
 ............................................................ttcccccccccctt..
 ............................................................ttcccccccccctt..
 ............................................................ttcccccccccctt..
-............................................................tt..........tt..
-............................................................tt..........tt..
-............................................................tt..........tt..
+............................................................ttmm..mm....tt..
+............................................................ttmm..mm....tt..
+............................................................ttmm..mm....tt..
 gggggggggggggggggggg....gggggggggggg....gggggggggggggggggggggg..............
 """

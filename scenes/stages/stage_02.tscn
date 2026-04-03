@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://stg02"]
+[gd_scene load_steps=8 format=3 uid="uid://stg02"]
 
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/stage_02.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/goal.gd" id="3"]
 [ext_resource type="Script" path="res://scripts/kill_zone.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://police_enemy01" path="res://scenes/police_enemy.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://goal_door_visual" path="res://scenes/goal_door_visual.tscn" id="6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_goal"]
 size = Vector2(40, 56)
@@ -44,9 +45,7 @@ next_scene = "res://scenes/stages/stage_03.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
 shape = SubResource("RectangleShape2D_goal")
 
-[node name="Polygon2D" type="Polygon2D" parent="Goal"]
-color = Color(0.35, 0.9, 0.55, 1)
-polygon = PackedVector2Array(-20, -40, 20, -40, 20, 16, -20, 16)
+[node name="DoorVisual" parent="Goal" instance=ExtResource("6")]
 
 [node name="KillZone" type="Area2D" parent="."]
 position = Vector2(768, 640)

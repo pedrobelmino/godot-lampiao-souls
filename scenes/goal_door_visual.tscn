@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://goal_door_visual"]
+
+[node name="DoorVisual" type="Node2D"]
+
+[node name="FrameLeft" type="Polygon2D" parent="."]
+color = Color(0.11, 0.07, 0.05, 1)
+polygon = PackedVector2Array(-20, -42, -13, -42, -13, 18, -20, 18)
+
+[node name="FrameRight" type="Polygon2D" parent="."]
+color = Color(0.11, 0.07, 0.05, 1)
+polygon = PackedVector2Array(13, -42, 20, -42, 20, 18, 13, 18)
+
+[node name="Lintel" type="Polygon2D" parent="."]
+color = Color(0.14, 0.1, 0.08, 1)
+polygon = PackedVector2Array(-21, -42, 21, -42, 21, -33, -21, -33)
+
+[node name="Sill" type="Polygon2D" parent="."]
+color = Color(0.12, 0.08, 0.06, 1)
+polygon = PackedVector2Array(-20, 12, 20, 12, 20, 18, -20, 18)
+
+[node name="DoorLeft" type="Polygon2D" parent="."]
+color = Color(0.32, 0.2, 0.14, 1)
+polygon = PackedVector2Array(-13, -32, -2, -32, -2, 12, -13, 12)
+
+[node name="DoorRight" type="Polygon2D" parent="."]
+color = Color(0.28, 0.18, 0.12, 1)
+polygon = PackedVector2Array(2, -32, 13, -32, 13, 12, 2, 12)
+
+[node name="PanelLineL" type="Polygon2D" parent="."]
+color = Color(0.18, 0.11, 0.08, 1)
+polygon = PackedVector2Array(-13, -12, -2, -12, -2, -10, -13, -10)
+
+[node name="PanelLineR" type="Polygon2D" parent="."]
+color = Color(0.18, 0.11, 0.08, 1)
+polygon = PackedVector2Array(2, -12, 13, -12, 13, -10, 2, -10)
+
+[node name="Handle" type="Polygon2D" parent="."]
+color = Color(0.42, 0.35, 0.18, 1)
+polygon = PackedVector2Array(4, -4, 6, -4, 6, 4, 4, 4)
