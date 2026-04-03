@@ -1,7 +1,7 @@
 extends "res://scripts/sertao_stage_base.gd"
 
 func _ready() -> void:
-	# Catedral (profundidade): pilares, altar em plataforma, dois pisos de pedra no fim.
+	# Catedral: pilares centrais (m, sem colisão); paredes ttt; altar e pisos em g/r/p.
 	spawn_tile = Vector2i(3, 15)
 	super._ready()
 
@@ -14,13 +14,13 @@ func _get_map() -> String:
 ..............ccc.....................ccc.....................ccc.....................ccc.......
 ..............ccc.....................ccc.....................ccc.....................ccc.......
 ........m...............m...............m...............m...............m.......................
-ttt................tt.......................tt.......................tt......................ttt
-ttt................tt.......................tt.......................tt......................ttt
-ttt................tt.......................tt.......................tt......................ttt
-ttt................tt.......................tt.......................tt......................ttt
-ttt................tt.......................tt.......................tt......................ttt
-ttt......pppppppp..tt................pppppppppppp..............pppppppppppp..................ttt
-ttt................tt.......................tt.......................tt......................ttt
+ttt................mm.......................mm.......................mm......................ttt
+ttt................mm.......................mm.......................mm......................ttt
+ttt................mm.......................mm.......................mm......................ttt
+ttt................mm.......................mm.......................mm......................ttt
+ttt................mm.......................mm.......................mm......................ttt
+ttt......pppppppp..mm................pppppppppppp..............pppppppppppp..................ttt
+ttt................mm.......................mm.......................mm......................ttt
 tttrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgggrgttt
 tttgggggggggggggggg....gggggggggggggg....gggggggggggggggggg...ggggggggggggggggggggggggggg....ttt
 """
