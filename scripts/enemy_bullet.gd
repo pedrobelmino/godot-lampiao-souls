@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var direction: Vector2 = Vector2.RIGHT
 
-const SPEED := 340.0
+const SPEED := 220.0
 const MAX_TRAVEL := 1500.0
 
 var _traveled: float = 0.0
